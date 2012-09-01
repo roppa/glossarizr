@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-
 <head>
-
        <meta charset="UTF-8">
-
        <title>Glosserizr</title>
 
 		<script src="/assets/js/jquery.js"></script>

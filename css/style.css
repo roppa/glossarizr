@@ -74,13 +74,6 @@ td { vertical-align: top; }
    Author: Mark Robson
    ========================================================================== */
 
-
-
-
-
-
-
-
 body {
 	background:#eee;
 }
@@ -90,6 +83,7 @@ body {
 	margin: auto;
 	background: #fff;
 	padding: 15px;
+	position: relative;
 }
 
 h1 {

@@ -14,8 +14,13 @@
 	
 	<meta name="viewport" content="width=device-width">
 	
-	<link rel="stylesheet" href="/css/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css' />
+	
+	<style type="text/css">
+	    #buttons { text-align:center; position: absolute; top: 20px; right: 20px; }
+	    #buttons img, #buttons a img { border: none; }
+	</style>
 	
 	<script src="/js/libs/modernizr-2.5.3.min.js"></script>
 	
@@ -45,7 +50,7 @@
 			if(isset($word_list)) {
 			
 				echo '<h1>';
-				echo sizeof($word_list) > 1 ? 'Your words' : 'Your word';
+				echo sizeof($word_list) > 1 ? 'Your words (' . count($word_list) . ')' : 'Your word';
 				echo '</h1>';
 				
 				echo '<ul class="word_links">';
@@ -91,7 +96,30 @@
 		<footer>
 			<small>&copy; 2012 Mark Robson</small>
 		</footer>
+		
+		
+		
+	<?php
+/*
+		echo '<pre>';
+		print_r($this->session->all_userdata());
+		echo '</pre>';
+*/
 
+		if ($this->session->userdata('id')) {
+			echo 'id : ' . $this->session->userdata('id');
+			echo '<br/>Name : ' .$this->session->userdata('username');
+			echo '<br/>You are login with : ' . $this->session->userdata('oauth_provider');
+			echo '<br/>Your session id is : ' . $this->session->userdata('session_id');
+			echo '<br/>Logout from <a href="' . site_url() . '/home/logout/'. '">' . $this->session->userdata('oauth_provider') . '</a>';
+			//display login links
+			//$this->session->userdata('session_id')) && (!$this->session->userdata('id')
+		} else { ?>
+			<aside id="buttons">
+				<a href="<?= site_url(); ?>/home/login/twitter"><img src="/img/tw_login.png"></a>
+				<a href="<?= site_url(); ?>/home/login/facebook"><img src="/img/fb_login.png"></a> <br /> 
+			</aside>
+		<?php } ?>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -99,7 +127,7 @@
 	<script>
 		$(function() {
 			$('article').before('<h2>Definition</h2>');
-		});
+		});	
 	</script>
 	<script>
 		var _gaq=[['_setAccount','UA-1945834-24'],['_trackPageview']];

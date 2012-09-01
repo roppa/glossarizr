@@ -37,5 +37,15 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+/*
+Social Media Constants
+*/
+//Facebook
+define('APP_ID', '192973374170009');
+define('APP_SECRET', '5fa94fcb79139e89ce5fd6bd171a8211');
+//Twitter
+define('YOUR_CONSUMER_KEY', 'wIPyxBlW1SKHoyPzVJhY9w');
+define('YOUR_CONSUMER_SECRET', 'CcBkXKIqrxDcTsWbJMNK7gUOju8coXmtkXMYAZXc');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

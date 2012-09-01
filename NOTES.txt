@@ -1,0 +1,5 @@
+TODO
+
+OAuth or link with facebook
+a user can store their glossary url like bit.ly
+store definitions in mongo.db

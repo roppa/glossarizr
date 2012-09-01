@@ -6,7 +6,28 @@ class Wordmodel extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-
+	
+	function check_user($uid, $oauth_provider, $username)
+	{
+/*
+		$query = mysql_query("SELECT * FROM `users` WHERE oauth_uid = '$uid' and oauth_provider = '$oauth_provider'") or die(mysql_error());
+		$result = mysql_fetch_array($query);
+		if (!empty($result)) {
+		    # User is already present
+		} else {
+		    #user not present. Insert a new Record
+		    $query = mysql_query("INSERT INTO `users` (oauth_provider, oauth_uid, username) VALUES ('$oauth_provider', $uid, '$username')") or die(mysql_error());
+		    $query = mysql_query("SELECT * FROM `users` WHERE oauth_uid = '$uid' and oauth_provider = '$oauth_provider'");
+		    $result = mysql_fetch_array($query);
+		    return $result;
+		}
+		return $result;
+*/
+	}
+    
+	/*
+		Word and definition processing section
+	*/
 	function process_entries ($entry)
 	{
 		$html = '';
@@ -90,8 +111,9 @@ class Wordmodel extends CI_Model {
 			//if () {
 			//	$html .= multimedia(from.multimedia);
 			//}
-			//$html .= '<dd>';					
-			$html .= $this->get_sense($entry['Sense']);
+			//$html .= '<dd>';
+			if (isset($entry['Sense']))
+				$html .= $this->get_sense($entry['Sense']);
 			//$html .= '</dd>';
 			
 			$html .= '</dl></li>';	
