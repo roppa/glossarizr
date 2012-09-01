@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 		$this->load->library('session');
 		
 		include_once('./twitter/twitteroauth.php');
+		include_once('./facebook/facebook.php');
 	}
 	
 	function login () 
@@ -28,12 +29,44 @@ class Home extends CI_Controller {
 			    // Let's generate the URL and redirect
 			    $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
 			    redirect($url, 'refresh');
-			} else {
-			    // It's a bad idea to kill the script, but we've got to know when there's an error.
-			    die('Something wrong happened.');
 			}
 		} else if ($this->uri->segment(3) == 'facebook') {
-		
+
+			$facebook = new Facebook(array(
+	            'appId' => APP_ID,
+	            'secret' => APP_SECRET,
+	            'cookie' => true
+	        ));
+
+			$session = $facebook->getSession();
+			
+			if (!empty($session)) {
+			    //Active session, let's try getting the user id (getUser()) and user info (api->('/me'))
+			    try {
+			        $uid = $facebook->getUser();
+			        $user = $facebook->api('/me');
+			    } catch (Exception $e) { }
+			
+			    if (!empty($user)) {
+			        //User info ok? Let's print it (Here we will be adding the login and registering routines)
+			        //print_r($user);
+			        $username = $user['name'];
+			        $userdata = $this->usermodel->get_user($uid, 'facebook', $username);
+
+			        if(!empty($userdata)) {
+			            $this->session->set_userdata('id', $userdata['id']);
+			            $this->session->set_userdata('oauth_id', $uid);
+			            $this->session->set_userdata('username', $userdata['username']);
+			            $this->session->set_userdata('oauth_provider', $userdata['oauth_provider']);
+			            redirect(site_url(), 'refresh');
+			        }
+			    }
+			} else {
+			    # There's no active session, let's generate one
+			    $login_url = $facebook->getLoginUrl();
+			    redirect($login_url, 'refresh');
+			}
+
 		} else {
 			//redirect 404?
 		}	
@@ -74,8 +107,6 @@ class Home extends CI_Controller {
 		            redirect(site_url(), 'refresh');
 		        }
 		    }
-		    
-		    
 		} else {
 		    // Something's missing, go back to square 1
 		    redirect(site_url() . '/home/login/twitter', 'refresh');

@@ -18,8 +18,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css' />
 	
 	<style type="text/css">
-	    #buttons { text-align:center; position: absolute; top: 20px; right: 20px; }
-	    #buttons img, #buttons a img { border: none; }
+	    #user { text-align:center; position: absolute; top: 20px; right: 20px; }
+	    #user img, #user a img { border: none; }
 	</style>
 	
 	<script src="/js/libs/modernizr-2.5.3.min.js"></script>
@@ -93,33 +93,21 @@
 			}
 		?>
 
+		<section id="user">
+		<?php
+			//print_r($this->session->all_userdata());
+			if ($this->session->userdata('id')) {
+				echo $this->session->userdata('username') . ' - logout from <a href="' . site_url() . '/home/logout/'. '">' . $this->session->userdata('oauth_provider') . '</a>';
+			} else { ?>
+					<a href="<?= site_url(); ?>/home/login/twitter"><img src="/img/tw_login.png"></a>
+					<a href="<?= site_url(); ?>/home/login/facebook"><img src="/img/fb_login.png"></a>
+			<?php } ?>
+		</section>
+
 		<footer>
 			<small>&copy; 2012 Mark Robson</small>
 		</footer>
 		
-		
-		
-	<?php
-/*
-		echo '<pre>';
-		print_r($this->session->all_userdata());
-		echo '</pre>';
-*/
-
-		if ($this->session->userdata('id')) {
-			echo 'id : ' . $this->session->userdata('id');
-			echo '<br/>Name : ' .$this->session->userdata('username');
-			echo '<br/>You are login with : ' . $this->session->userdata('oauth_provider');
-			echo '<br/>Your session id is : ' . $this->session->userdata('session_id');
-			echo '<br/>Logout from <a href="' . site_url() . '/home/logout/'. '">' . $this->session->userdata('oauth_provider') . '</a>';
-			//display login links
-			//$this->session->userdata('session_id')) && (!$this->session->userdata('id')
-		} else { ?>
-			<aside id="buttons">
-				<a href="<?= site_url(); ?>/home/login/twitter"><img src="/img/tw_login.png"></a>
-				<a href="<?= site_url(); ?>/home/login/facebook"><img src="/img/fb_login.png"></a> <br /> 
-			</aside>
-		<?php } ?>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>

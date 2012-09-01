@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://glosserizr';
+$config['base_url']	= 'http://glossarizr';
 
 /*
 |--------------------------------------------------------------------------

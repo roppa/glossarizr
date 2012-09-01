@@ -41,6 +41,14 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+/*
+//remote
+$db['default']['hostname'] = 'mysql1096.servage.net';
+$db['default']['username'] = 'glossarizr';
+$db['default']['password'] = '1thetan4';
+$db['default']['database'] = 'glossarizr';
+*/
+//local
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'root';
